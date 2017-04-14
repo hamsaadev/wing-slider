@@ -1,0 +1,122 @@
+name: Wing Slider
+description: slides images based on buttons with description.
+type: particle
+icon: fa-sliders
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable to the particles.
+      default: true
+
+    background:
+      type: input.imagepicker
+      label: background
+      description: Select an image as the button.
+
+    bgsize:
+      type: select.select
+      label: background scale
+      description: Select background scale.
+      default: section
+      options:
+        section: whole section
+        sliderbox: just slider area
+
+    btnposition:
+        type: select.select
+        label: buttons position
+        description: Select to place buttons on right or left of mockups.
+        default: left
+        options:
+          right: right
+          left: left
+          up: up
+          bottom: bottom
+
+    textcolor:
+      type: input.colorpicker
+      label: buttons text color
+      default: "#ffffff"
+
+    items:
+      type: collection.list
+      array: true
+      label: Items
+      description: Create each person item.
+      value: name
+      ajax: true
+
+      fields:
+
+        .image:
+          type: input.imagepicker
+          label: background
+          description: Select an image as the button.
+
+        .text:
+          type: input.text
+          label: text
+          description: Customize the section title text.
+
+        .link:
+          type: input.text
+          label: link
+          description: Place a link for the slide button.
+
+        .target:
+          type: select.select
+          label: button link target
+          description: Target of button link.
+          placeholder: 'Select...'
+          default: _blank
+          options:
+              _self: Self
+              _blank: New Window
+
+        .mockup:
+          type: input.imagepicker
+          label: mockup
+          description: Customize the section title text.
+
+        .description:
+          type: textarea.textarea
+          label: description
+          description: write a description related to the current mockup.
+
+        .descposition:
+            type: select.select
+            label: description position
+            description: Select to place buttons on right or left of mockups.
+            default: bottom
+            options:
+              up: up
+              bottom: bottom
+
+    description:
+      type: textarea.textarea
+      label: description
+      description: write a description related to the mockups.
+
+    gdesccolor:
+        type: input.colorpicker
+        label: description color
+        default: "#ffffff"
+
+    descposition:
+        type: select.select
+        label: description position
+        description: Select to place buttons on right or left of mockups.
+        default: right
+        options:
+          right: right
+          left: left
+          up: up
+          bottom: bottom
+          
+    customcss:
+        type: textarea.textarea
+        label: Custom css
+        description: Enter your custom css for wing slider.

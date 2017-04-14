@@ -1,0 +1,223 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+		<div class="wing-slider {{ particle.class|e }}">
+		{% if particle.textcolor is not empty %}<style> {{ particle.customcss|e }} </style>{% endif %}
+			{% if particle.background is not empty %}<img src="{{ url(particle.background) }}" alt="slider background" class="wing-slider-bg-{% if particle.bgsize == "section" %}full{% elseif particle.bgsize == "sliderbox" %}box{% endif %} wing-slider-bg">{% endif %}
+			{% if particle.bgsize == "section" %}<script> jQuery('.wing-slider').each(function(){}) </script>{% else %}<script> jQuery('.wing-slider').each(function(){}) </script>{% endif %}
+
+			}%}
+			{% if particle.btnposition == "up" and particle.items is not empty or particle.descposition == "up" and particle.descposition is not empty %}
+			<div class="g-grid  topOfSlider" style="direction:ltr;">
+				{% if particle.btnposition == "up" and particle.items is not empty %}
+				{% block buttonsHorizental %}
+				{% set button = 1 %}
+				<div class="wing-slider-tb-btn">
+					{% for item in particle.items %}
+						<div id="button-slider{{button}}" class="wing-btn-image-text">
+							{% if item.link %}
+								<a href="{{ url(item.link) }}" target="{{ item.readmorelinktarget|default('_self')|e }}">
+							{% endif %}
+							{% if item.image and item.text %}
+								<img class="wing-slider-button-image" src="{{url(item.image)}}">
+								<span {% if particle.textcolor is not empty %} style="color:{{particle.textcolor}};" {% endif %} class="wing-slider-button-text"> {{item.text}} </span>
+							{% endif %}
+							{% if item.image and not item.text %}
+								<img class="wing-slider-button-image" src="{{url(item.image)}}">
+							{% endif %}
+							{% if not item.image and item.text %}
+								<span {% if particle.textcolor is not empty %} style="color:{{particle.textcolor}};" {% endif %} class="wing-slider-button-text"> {{item.text}} </span>
+							{% endif %}
+							{% if item.link %}
+							</a>
+							{% endif %}
+						</div>
+						{% set button = button + 1 %}
+					{% endfor %}
+				</div>
+			{% endblock %}
+			{% endif %}
+			{% if  particle.descposition is not empty and particle.descposition == "up" %}
+				<p {% if particle.gdesccolor is not empty %}style="color:{{particle.gdesccolor}};"{% endif %} class="wing-slider-up-desc">{{particle.description}}</p>
+			{% endif %}
+			</div>
+			{% endif %}
+			<div class="g-grid" style="direction:ltr;">
+
+				{% if particle.btnposition == "right" and particle.items is not empty or  particle.descposition == "right" and particle.descposition is not empty %}
+					<div class="g-block  size-20">
+						{% if particle.btnposition == "right" %}
+						{% block buttonsVerticall %}{% set button = 1 %}
+						<div class="wing-slider-side-btn">
+							{% for item in particle.items %}
+								<div id="button-slider{{button}}" class="wing-btn-image-text">
+									{% if item.link %}
+										<a href="{{ url(item.link) }}" target="{{ item.readmorelinktarget|default('_self')|e }}">
+									{% endif %}
+									{% if item.image and item.text %}
+										<img class="wing-slider-button-image" src="{{url(item.image)}}">
+										<span {% if particle.textcolor is not empty %} style="color:{{particle.textcolor}};" {% endif %} class="wing-slider-button-text"> {{item.text}} </span>
+									{% endif %}
+									{% if item.image and not item.text %}
+										<img class="wing-slider-button-image" src="{{url(item.image)}}">
+									{% endif %}
+									{% if not item.image and item.text %}
+										<span {% if particle.textcolor is not empty %} style="color:{{particle.textcolor}};" {% endif %} class="wing-slider-button-text"> {{item.text}} </span>
+									{% endif %}
+									{% if item.link %}
+									</a>
+									{% endif %}
+								</div>
+								{% set button = button + 1 %}
+							{% endfor %}
+						</div>
+						{% endblock %}
+						{% endif %}
+						{% if  particle.descposition == "right" %}
+							<p {% if particle.gdesccolor is not empty %}style="color:{{particle.gdesccolor}};"{% endif %} class="wing-slider-side-desc">{{particle.description}}</p>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if (particle.btnposition == "left" and  particle.descposition == "right") or (particle.btnposition == "right" and  particle.descposition == "left") %}
+					<div class="g-block wing-slider-main size-60 hidden-phone">
+					{% elseif (particle.description is empty) or (particle.btnposition ==  particle.descposition == "left") or (particle.btnposition ==  particle.descposition == "right") or (particle.btnposition == "left" and particle.descposition == "up") or (particle.btnposition == "left" and particle.descposition == "bottom") or (particle.btnposition == "right" and particle.descposition == "bottom") or (particle.btnposition == "right" and particle.descposition == "up") or (particle.btnposition == "up" and particle.descposition == "left") or (particle.btnposition == "bottom" and particle.descposition == "left") or (particle.btnposition == "up" and particle.descposition == "right") or (particle.btnposition == "bottom" and particle.descposition == "right") %}
+					<div class="g-block wing-slider-main size-80 hidden-phone">
+					{% else %}
+					<div class="g-block wing-slider-main size-100 hidden-phone">
+				{% endif %}
+					<div class="g-grid topOfSlide">
+						{% set desc = 1 %}
+						{% for item in particle.items %}
+							{% if item.descposition == "up" %}
+								<div id="desc-slide{{desc}}">
+									<p class="wing-slide-desc"> {{item.description}} </p>
+								</div>
+							{% endif %}
+							{% set desc = desc + 1 %}
+						{% endfor %}
+					</div>
+					<div class="g-grid">
+						<div class="wing-slider-images">
+							{% set image = 1 %}
+							{% for item in particle.items %}
+									<div id="slide{{ image }}">
+										<img src="{{ url(item.mockup) }}" class="img-responsive">
+									</div>
+								{% set image = image + 1 %}
+							{% endfor %}
+						</div>
+					</div>
+					<div class="g-grid bottomOfSlide">
+						{% set desc2 = 1 %}
+						{% for item in particle.items %}
+							{% if item.descposition == "bottom" %}
+								<div id="desc-slide{{desc2}}">
+									<p class="wing-slide-desc"> {{item.description}} </p>
+								</div>
+							{% endif %}
+							{% set desc2 = desc2 + 1 %}
+						{% endfor %}
+					</div>
+				</div>
+
+				{% if particle.btnposition == "left" and particle.items is not empty or particle.descposition == "left" and particle.descposition is not empty %}
+					<div class="g-block  size-20">
+						{% if particle.btnposition == "left" %}
+							{{ block('buttonsVerticall') }}
+						{% endif %}
+						{% if  particle.descposition == "left" %}
+							<p {% if particle.gdesccolor is not empty %}style="color:{{particle.gdesccolor}};"{% endif %} class="wing-slider-side-desc">{{particle.description}}</p>
+						{% endif %}
+					</div>
+				{% endif %}
+
+			</div>
+			{% if particle.btnposition == "bottom" and particle.items is not empty or particle.descposition == "bottom" and particle.descposition is not empty %}
+				<div class="g-grid bottomOfSlider" style="direction:ltr;">
+					{% if particle.btnposition == "bottom" %}
+						{{ block('buttonsHorizental') }}
+					{% endif %}
+					{% if  particle.descposition is not empty and particle.descposition == "bottom" %}
+						<p {% if particle.gdesccolor is not empty %}style="color:{{particle.gdesccolor}};"{% endif %} class="wing-slider-bottom-desc">{{particle.description}}</p>
+					{% endif %}
+				</div>
+			{% endif %}
+		</div>
+		<script>
+			function initSlider(){
+				var numberOfSliders = 1;
+				jQuery('.wing-slider').each(function(){
+					jQuery(this).attr("id","numofslider"+numberOfSliders);
+					var width = jQuery(this).find(".wing-slider-main").width();
+					var section = jQuery(this).parent().parent().parent().parent().parent();
+					jQuery(this).parent().css('padding','0px').css('margin','0px');
+					var height, h;
+					if(jQuery('.wing-slider-bg').length>0){
+						h = jQuery(this).find('.wing-slider-bg').height(); jQuery(this).css('height',h+'px').css('height','-=0.001px');
+					}else{
+						h = '60vh'; jQuery(this).css('height',h).css('height','-=0.001px');
+					}
+					if(jQuery('.wing-slider-side-btn').length>0){
+						jQuery('.wing-btn-image-text img').css({'max-height':(jQuery(this).height()/jQuery('.wing-btn-image-text').length)+'px'});
+					}
+					height = jQuery(this).height();
+					section.css({"height":height}).css('padding','0px');
+					section.find('.g-container').height(height).css('padding','0px');
+					jQuery(this).find('#slide1').addClass('active').css({"z-index":"1","opacity":"1"});
+					jQuery(this).find('#desc-slide1').addClass('active').css({"z-index":"1","opacity":"1"});
+					jQuery(this).find('[id^="slide"]').css("max-width",width);
+					var ht = hb = -10, htt = hbb = 0;
+					if(jQuery(this).find('.topOfSlider').length > 0){
+						ht = jQuery(this).find('.topOfSlider').height();
+						jQuery(this).find('.topOfSlider').css({'transform': 'translateY('+(section.offset().top - jQuery(this).find('.topOfSlider').offset().top)+'px)'});
+					}
+					if(jQuery(this).find('.bottomOfSlider').length > 0){
+						hb = jQuery(this).find('.bottomOfSlider').height();
+						jQuery(this).find('.bottomOfSlider').css({'transform': 'translateY('+(((height+section.offset().top) - jQuery(this).find('.bottomOfSlider').offset().top)-hb)+'px)'});
+					}
+					if(jQuery(this).find('.topOfSlide [id^="desc-slide"]').length > 0){
+						htt = jQuery(this).find('.topOfSlide [id^="desc-slide"]').height();
+						jQuery(this).find('.topOfSlide').css({"transform": "translateY("+((section.offset().top+ht)- jQuery(this).find('.topOfSlide').offset().top) +"px )"})}
+					if(jQuery(this).find('.bottomOfSlide [id^="desc-slide"]').length > 0){
+						hbb = jQuery(this).find('.bottomOfSlide [id^="desc-slide"]').height();
+						jQuery(this).find('.bottomOfSlide').css({"transform": "translateY("+((height+section.offset().top)-(jQuery(this).find('.bottomOfSlide [id^="desc-slide"]').offset().top+hbb+hb))+"px)"})}
+					if(jQuery(this).find('.topOfSlide [id^="desc-slide"]').length > 0 || jQuery(this).find('.bottomOfSlide [id^="desc-slide"]').length > 0){
+						jQuery('[id^="desc-slide"]').css({"width": jQuery(this).find('.wing-slider-main').width()})
+					}
+					jQuery('[id^="slide"]').css({ "bottom":"0"});jQuery("[id^='slide'] img").css({"max-height":height - (ht + htt +10) - (hb + hbb +10)});
+					var slidenumber = 1, slidecontainerwidth = jQuery(this).find('.wing-slider-main').width();
+					jQuery(this).find('.wing-slider-main [id^="slide"]').each(function(){
+						jQuery(this).css({"margin-left": ((slidecontainerwidth - jQuery(this).width())/2)+"px"});
+						slidenumber = slidenumber + 1;
+					});
+				});
+
+				jQuery('[id^="numofslider"]').hover( function(){
+					var slider= this.id.substring(11);
+					var currentplatid = jQuery('#numofslider'+slider).find('.active').attr("id");
+					var currentplat= currentplatid.substring(5);
+					jQuery('#numofslider'+slider+' [id^="button-slider"]').hover( function(){
+						var object= this.id.substring(13);
+						if(currentplat !== object){
+							currentplat = object;
+							jQuery('#numofslider'+slider+' .active').removeClass('active');
+							jQuery('#numofslider'+slider+' #slide'+object).addClass('active').css({'z-index':'0'});
+							jQuery('#numofslider'+slider+' #desc-slide'+object).addClass('active').css({'z-index':'0'});
+							jQuery('#numofslider'+slider+' .active').siblings().css({'z-index':'1'});
+							jQuery('#numofslider'+slider+' [id^="desc-slide"]').not(".active").css({'z-index':'1'});
+							jQuery('#numofslider'+slider+' .active').css({'opacity':'1'});
+							jQuery('#numofslider'+slider+' .active').siblings().css({'opacity':'0'});
+							jQuery('#numofslider'+slider+' .active').siblings().css({'z-index':'0'});
+							jQuery('#numofslider'+slider+' [id^="desc-slide"]').not(".active").css({'opacity':'0'});
+							jQuery('#numofslider'+slider+' [id^="desc-slide"]').not(".active").css({'z-index':'0'});
+							jQuery('#numofslider'+slider+' .active').css({'z-index':'1'});
+						}
+					});
+				});
+			}
+		  jQuery(window).bind("load", function() {
+				initSlider();
+			});
+		</script>
+{% endblock %}

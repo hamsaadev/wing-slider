@@ -1,0 +1,51 @@
+.wing-slider{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .wing-slider-bg-full {
+      width: 100vw;
+      position: absolute;
+      right: 0;
+      top: 0px;
+      z-index: -1;
+  }
+  [id^=slide] {
+      position: absolute;
+      bottom: 0;
+      opacity: 0;
+      text-align: center;
+      z-index: 0;
+      transition: all .4s ease-in-out;
+  }
+  [id^=desc-slide]{
+    opacity: 0;
+    z-index: 0;
+    transition: all .4s ease-in-out;
+  }
+  [id^=button-slider] {
+      margin: 10px;
+      position: relative;
+      .wing-slider-button-image{
+        border-radius: 10px;
+      }
+      span{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+  }
+  .wing-slider-tb-btn {
+      display: inherit;
+  }
+  .topOfSlider, .bottomOfSlider {
+    p {
+      margin: 0 auto;
+    }
+  }
+  [id^=desc-slide] {
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+  }
+}
