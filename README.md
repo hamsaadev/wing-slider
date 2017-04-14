@@ -28,9 +28,13 @@ Mark each option you want to change then edit that item.
 *`buttons text color` as it is saying, it lets you choose color of download buttons.
 *`items` are your mockup images with their options like downlod buttons.
   click on `+` to add new item and give the item a name like below:
+  
   ![Slider panel picture selector](https://raw.githubusercontent.com/hamsaadev/win-slider/master/screenshots/wing-slider-panel-ss4.jpg)
+  
   each item has its own options.
+  
   ![Slider panel picture selector](https://raw.githubusercontent.com/hamsaadev/win-slider/master/screenshots/wing-slider-panel-ss5.jpg)
+  
   *`background` it lets you select an image as your button background.
   *`text` the buttons title.
   *`link` it's your download button's download link. choose it's target on the next option.
